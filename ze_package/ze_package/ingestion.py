@@ -80,5 +80,11 @@ def fetch_pokemon_data(pokemon_id):
     
 def insert_pokemon_data(client, data):
     if data:
-        client.insert('pokemon', [data], column_names=['id', 'name', 'type', 'hp', 'attack', 'defense'])
-        print(f"Pokémon {data[1]} inserido com sucesso!")
+        try:
+            client.insert('pokemon', [data], column_names=['id', 'name', 'type', 'hp', 'attack', 'defense'])
+            print(f"Pokémon {data[1]} inserido com sucesso!")
+        except Exception as e:
+            print(f"Erro ao inserir Pokémon: {str(e)}")
+            raise
+    else:
+        print("Dados inválidos")
